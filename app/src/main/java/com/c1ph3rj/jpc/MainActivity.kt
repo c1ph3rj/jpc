@@ -4,7 +4,6 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.animation.animateContentSize
-import androidx.compose.animation.core.LinearEasing
 import androidx.compose.animation.core.LinearOutSlowInEasing
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
@@ -23,7 +22,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.c1ph3rj.jpc.constants.CustomColors
+import com.c1ph3rj.jpc.constants.ImageFromUrl
 import com.c1ph3rj.jpc.constants.fontFamily
 import com.c1ph3rj.jpc.ui.theme.JpcTheme
 import com.c1ph3rj.jpc.ui.theme.LightWhite
@@ -46,13 +45,17 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun Greeting() {
+    val onlineUrl =
+        "https://images.pexels.com/photos/164634/pexels-photo-164634.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+    val downloadableUrl =
+        "https://images.pexels.com/photos/337909/pexels-photo-337909.jpeg?cs=srgb&dl=pexels-pavlo-luchkovski-337909.jpg&fm=jpg&_gl=1*1b9is5x*_ga*MTcwMTMyMzgzMi4xNjY1OTgyNzg4*_ga_8JE65Q40S6*MTY3NzY2NzU0OC44LjEuMTY3NzY2NzU1Ni4wLjAuMA.."
     var expandedState by remember {
         mutableStateOf(false)
     }
-    val rotationState by animateFloatAsState(targetValue = if(expandedState) 180f else 0f)
+    val rotationState by animateFloatAsState(targetValue = if (expandedState) 180f else 0f)
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = Modifier.fillMaxSize(),
+        modifier = Modifier.fillMaxSize()
     ) {
         Card(
             modifier = Modifier
@@ -98,19 +101,24 @@ fun Greeting() {
                         )
                     }
                 }
-                if (expandedState){
-                    Text("The company will roll out the MIUI 14 update in Mi 10T Pro, Mi 10T, Redmi Note 11 Pro 5G, Redmi Note 12 5G, Redmi Note 11S, Redmi Note 11T 5G, Redmi 10 Prime 2022, Redmi 10 Prime, Redmi Note 11 and Redmi 10 in Q3 2023.",
-                    style = MaterialTheme.typography.subtitle1,
-                    fontFamily = fontFamily,
-                    modifier = Modifier.padding(10.dp))
+                if (expandedState) {
+                    Text(
+                        "The company will roll out the MIUI 14 update in Mi 10T Pro, Mi 10T, Redmi Note 11 Pro 5G, Redmi Note 12 5G, Redmi Note 11S, Redmi Note 11T 5G, Redmi 10 Prime 2022, Redmi 10 Prime, Redmi Note 11 and Redmi 10 in Q3 2023.",
+                        style = MaterialTheme.typography.subtitle1,
+                        fontFamily = fontFamily,
+                        modifier = Modifier.padding(10.dp)
+                    )
                 }
             }
         }
-        Card(modifier = Modifier.padding(20.dp),
-        backgroundColor = LightWhite){
+        Card(
+            modifier = Modifier.padding(20.dp),
+            backgroundColor = LightWhite
+        ) {
             GoogleSignUpBtn()
         }
 
+        ImageFromUrl(Url = onlineUrl, downloadableUrl = downloadableUrl)
     }
 }
 
